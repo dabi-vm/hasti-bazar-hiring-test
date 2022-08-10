@@ -10,17 +10,22 @@ import { ModifyLinkForm } from "../../ModifyLinkForm/ModifyLinkForm";
 interface IProps {
   item: ILinkItem;
   deleteHandler(id: string): void;
-  editHandler(id: string): void;
+  editHandler(v: ILinkItem): void;
 }
 export const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
   const [isExpand, setIsExpand] = useState(false);
   const { showModal, hideModal } = useContext(ModalContext);
   const [editValues, setEditValues] = useState<ILinkItem>();
 
-  const HandleEdit = (v: ILinkItem) => {
+  const HandleSelectItem = (v: ILinkItem) => {
     setEditValues(v);
-    setIsExpand(!isExpand);
-    editHandler(item.id);
+    setIsExpand(true);
+  };
+
+  const HandleSubmitEdit = (v: ILinkItem) => {
+    editHandler(v);
+    setEditValues(undefined);
+    setIsExpand(false);
   };
 
   const HandleDeleteModal = (id: string) => {
@@ -76,7 +81,7 @@ export const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
         <Button
           variant="text"
           color="warning"
-          onClick={() => HandleEdit(item)}
+          onClick={() => HandleSelectItem(item)}
           disabled={isExpand}
         >
           <EditIcon />
@@ -94,7 +99,7 @@ export const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
       <Grid item xs={12}>
         <Collapse in={isExpand} timeout="auto" unmountOnExit>
           <ModifyLinkForm
-            handleSubmit={editHandler}
+            handleSubmit={HandleSubmitEdit}
             handleCancel={HandleCancel}
             defaultValues={editValues}
           />

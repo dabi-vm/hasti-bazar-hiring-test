@@ -16,7 +16,7 @@ export const SocialNetworksList = [
     name: "Telegram",
   },
   {
-    id: "Linked In",
+    id: "LinkedIn",
     name: "LinkedIn",
   },
   {

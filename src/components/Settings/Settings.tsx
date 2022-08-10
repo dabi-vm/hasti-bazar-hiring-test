@@ -32,6 +32,18 @@ export const Settings = () => {
     setLinksList((preState) => preState.filter((el) => el.id !== id));
   };
 
+  const HandleEditLink = (v: ILinkItem) => {
+    setLinksList((preState) =>
+      preState.map((el) => {
+        if (el.id === v.id) {
+          el.link = v.link;
+          el.title = v.title;
+        }
+        return el;
+      })
+    );
+  };
+
   return (
     <Grid container>
       <Navbar title="تنظیمات کاربری" breadcrumbs={breadcrumbs} />
@@ -39,7 +51,11 @@ export const Settings = () => {
         <CustomPaper>
           <p>مسیرهای ارتباطی</p>
           <AddLink handleSubmit={HandleAddLink} />
-          <LinksList links={linksList} handleDelete={HandleDeleteLink} />
+          <LinksList
+            links={linksList}
+            handleDelete={HandleDeleteLink}
+            handleEdit={HandleEditLink}
+          />
         </CustomPaper>
       </Grid>
     </Grid>

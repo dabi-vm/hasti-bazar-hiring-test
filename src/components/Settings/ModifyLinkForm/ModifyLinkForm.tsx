@@ -6,10 +6,7 @@ import { SocialNetworksList } from "../AddLink/AddlinkConstants";
 interface IProps {
   handleSubmit(v: ILinkItem): void;
   handleCancel(): void;
-  defaultValues?: {
-    title: string;
-    link: string;
-  };
+  defaultValues?: ILinkItem;
 }
 
 export const ModifyLinkForm: FC<IProps> = ({
@@ -29,7 +26,7 @@ export const ModifyLinkForm: FC<IProps> = ({
     };
 
     const values: ILinkItem = {
-      id: new Date().toString(),
+      id: defaultValues ? defaultValues.id : new Date().toString(),
       title: target.type.value,
       link: target.link.value,
     };
