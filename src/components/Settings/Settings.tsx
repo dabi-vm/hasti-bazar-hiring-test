@@ -33,6 +33,7 @@ export const Settings = () => {
   };
 
   const HandleEditLink = (v: ILinkItem) => {
+    // find item and replace new item data
     setLinksList((preState) =>
       preState.map((el) => {
         if (el.id === v.id) {
