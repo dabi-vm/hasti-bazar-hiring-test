@@ -69,10 +69,11 @@ export const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
 
   return (
     <GridContainer container item xs={12}>
-      <Grid item xs={12} sm={9}>
+      <Grid item xs={12} sm={9} container alignItems="center">
         <Icons name={item.title} />
+        &nbsp;
         {item.title}&nbsp;
-        <Typography variant="caption">لینک: </Typography>
+        <Typography variant="caption">لینک: </Typography>&nbsp;
         <Link href={item.link} color="#ffa82e">
           {item.link}
         </Link>
