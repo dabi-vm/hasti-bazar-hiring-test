@@ -6,9 +6,8 @@ import MainRoutes from "../routes/Router";
 export const MainLayout = () => {
   return (
     <BrowserRouter>
-      <Container>
+      <Container maxWidth="md">
         <Grid container>
-          <Navbar />
           <Routes>
             {MainRoutes.map((route) => (
               <Route
