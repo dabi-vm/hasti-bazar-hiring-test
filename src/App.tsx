@@ -1,7 +1,12 @@
+import ModalContextProvider from "./context/ModalContext";
 import { MainLayout } from "./layouts/MainLayout";
 
 function App() {
-  return <MainLayout />;
+  return (
+    <ModalContextProvider>
+      <MainLayout />
+    </ModalContextProvider>
+  );
 }
 
 export default App;
