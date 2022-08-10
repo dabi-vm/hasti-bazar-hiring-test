@@ -1,5 +1,5 @@
 import { Grid, Button, Collapse, Typography, Link } from "@mui/material";
-import { FC, useContext, useState } from "react";
+import { FC, memo, useContext, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { GridContainer } from "./LinkItemStyle";
@@ -12,7 +12,7 @@ interface IProps {
   deleteHandler(id: string): void;
   editHandler(v: ILinkItem): void;
 }
-export const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
+const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
   const [isExpand, setIsExpand] = useState(false);
   const { showModal, hideModal } = useContext(ModalContext);
   const [editValues, setEditValues] = useState<ILinkItem>();
@@ -109,3 +109,5 @@ export const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
     </GridContainer>
   );
 };
+
+export default memo(LinkItem);

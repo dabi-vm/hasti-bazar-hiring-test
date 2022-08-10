@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { FC } from "react";
 import { ILinkItem } from "../../../models/links";
-import { LinkItem } from "./LinkItem/LinkItem";
+import LinkItem from "./LinkItem/LinkItem";
 
 interface IProps {
   links: ILinkItem[];
