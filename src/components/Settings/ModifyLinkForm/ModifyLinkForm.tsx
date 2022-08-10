@@ -1,4 +1,11 @@
-import { Grid, Select, MenuItem, TextField, Button } from "@mui/material";
+import {
+  Grid,
+  Select,
+  MenuItem,
+  TextField,
+  Button,
+  Paper,
+} from "@mui/material";
 import React, { FC, useRef } from "react";
 import { ILinkItem } from "../../../models/links";
 import { Icons } from "../../shared/Icons/Icons";
@@ -40,41 +47,43 @@ export const ModifyLinkForm: FC<IProps> = ({
   };
 
   return (
-    <Grid
-      container
-      component="form"
-      ref={formRef}
-      className="w-full"
-      onSubmit={HandleCreateValues}
-      spacing={1}
-    >
-      <Grid item xs={4}>
-        <Select
-          name="type"
-          placeholder="نوع"
-          fullWidth
-          defaultValue={defaultValues?.title}
-        >
-          {SocialNetworksList.map((item) => (
-            <MenuItem key={item.id} value={item.id}>
-              <Grid container alignItems="center">
-                <Icons name={item.name} />
-                &nbsp;
-                {item.name}
-              </Grid>
-            </MenuItem>
-          ))}
-        </Select>
-      </Grid>
-      <Grid item xs={8}>
-        <TextField
-          name="link"
-          placeholder="لینک"
-          fullWidth
-          defaultValue={defaultValues?.link}
-        />
-      </Grid>
-      <Grid item xs={12} container justifyContent="flex-end" spacing={1}>
+    <Paper variant="black70">
+      <Grid
+        container
+        spacing={1}
+        justifyContent="flex-end"
+        item
+        xs={12}
+        component="form"
+        ref={formRef}
+        onSubmit={HandleCreateValues}
+      >
+        <Grid item xs={4}>
+          <Select
+            name="type"
+            placeholder="نوع"
+            fullWidth
+            defaultValue={defaultValues?.title}
+          >
+            {SocialNetworksList.map((item) => (
+              <MenuItem key={item.id} value={item.id}>
+                <Grid container alignItems="center">
+                  <Icons name={item.name} />
+                  &nbsp;
+                  {item.name}
+                </Grid>
+              </MenuItem>
+            ))}
+          </Select>
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            name="link"
+            placeholder="لینک"
+            fullWidth
+            defaultValue={defaultValues?.link}
+          />
+        </Grid>
         <Grid item>
           <Button
             children="انصراف"
@@ -92,6 +101,6 @@ export const ModifyLinkForm: FC<IProps> = ({
           />
         </Grid>
       </Grid>
-    </Grid>
+    </Paper>
   );
 };

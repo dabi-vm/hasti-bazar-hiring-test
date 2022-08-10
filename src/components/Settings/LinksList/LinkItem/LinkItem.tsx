@@ -1,12 +1,12 @@
-import { Grid, Button, Collapse, Typography, Link } from "@mui/material";
+import { Grid, Button, Collapse, Typography, Link, Paper } from "@mui/material";
 import { FC, memo, useContext, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { GridContainer } from "./LinkItemStyle";
 import { ILinkItem } from "../../../../models/links";
 import { Icons } from "../../../shared/Icons/Icons";
 import { ModalContext } from "../../../../context/ModalContext";
 import { ModifyLinkForm } from "../../ModifyLinkForm/ModifyLinkForm";
+import "./LinkItemStyles.css";
 interface IProps {
   item: ILinkItem;
   deleteHandler(id: string): void;
@@ -68,7 +68,14 @@ const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
   };
 
   return (
-    <GridContainer container item xs={12}>
+    <Grid
+      container
+      item
+      xs={12}
+      component={Paper}
+      variant="black80"
+      className="root"
+    >
       <Grid item xs={12} sm={9} container alignItems="center">
         <Icons name={item.title} />
         &nbsp;
@@ -106,7 +113,7 @@ const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
           />
         </Collapse>
       </Grid>
-    </GridContainer>
+    </Grid>
   );
 };
 

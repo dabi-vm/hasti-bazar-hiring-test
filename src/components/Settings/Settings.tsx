@@ -48,8 +48,8 @@ export const Settings = () => {
   return (
     <Grid container>
       <Navbar title="تنظیمات کاربری" breadcrumbs={breadcrumbs} />
-      <Grid item xs={12}>
-        <CustomPaper>
+      <Grid item xs={12} >
+        <CustomPaper variant="black90" elevation={1}>
           <p>مسیرهای ارتباطی</p>
           <AddLink handleSubmit={HandleAddLink} />
           <LinksList

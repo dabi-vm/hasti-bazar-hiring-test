@@ -1,7 +1,6 @@
-import { Button, Collapse } from "@mui/material";
+import { Button, Collapse, Paper } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { FC, useState } from "react";
-import { CustomPaper } from "./AddLinkStyles";
 import { ModifyLinkForm } from "../ModifyLinkForm/ModifyLinkForm";
 import { ILinkItem } from "../../../models/links";
 
@@ -25,7 +24,7 @@ export const AddLink: FC<IProps> = ({ handleSubmit }) => {
   };
 
   return (
-    <CustomPaper elevation={0}>
+    <Paper elevation={0} variant="black80">
       <Button variant="text" color="warning" size="small" onClick={HandleAdd}>
         <AddIcon fontSize="small" />
         &nbsp; افزودن مسیر ارتباطی
@@ -36,6 +35,6 @@ export const AddLink: FC<IProps> = ({ handleSubmit }) => {
           handleCancel={HandleCancel}
         />
       </Collapse>
-    </CustomPaper>
+    </Paper>
   );
 };

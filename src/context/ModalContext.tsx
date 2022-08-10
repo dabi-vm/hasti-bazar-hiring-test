@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import Modal from "../components/shared/Modal/Modal";
 import { IModalProps } from "../models/modal";
 
-export interface IProps {
+interface IProps {
   children: any;
 }
 

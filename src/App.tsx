@@ -1,11 +1,17 @@
 import ModalContextProvider from "./context/ModalContext";
+import ThemeContextProvider from "./context/ThemeContext";
 import { MainLayout } from "./layouts/MainLayout";
+import ThemeProvider from "./themes/ThemeProvider";
 
 function App() {
   return (
-    <ModalContextProvider>
-      <MainLayout />
-    </ModalContextProvider>
+    <ThemeContextProvider>
+      <ThemeProvider>
+        <ModalContextProvider>
+          <MainLayout />
+        </ModalContextProvider>
+      </ThemeProvider>
+    </ThemeContextProvider>
   );
 }
 

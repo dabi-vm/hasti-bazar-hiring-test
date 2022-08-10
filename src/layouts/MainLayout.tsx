@@ -1,13 +1,20 @@
-import { Container, Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Navbar } from "../components/Navbar/Navbar";
 import MainRoutes from "../routes/Router";
 
 export const MainLayout = () => {
   return (
     <BrowserRouter>
-      <Container maxWidth="md">
-        <Grid container>
+      <Grid
+        container
+        justifyContent="center"
+        component={Paper}
+        square
+        className="fullHeight"
+        variant="black100"
+        sx={{ margin: 0 }}
+      >
+        <Grid item xs={12} md={6}>
           <Routes>
             {MainRoutes.map((route) => (
               <Route
@@ -19,7 +26,7 @@ export const MainLayout = () => {
             ))}
           </Routes>
         </Grid>
-      </Container>
+      </Grid>
     </BrowserRouter>
   );
 };

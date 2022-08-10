@@ -10,7 +10,7 @@ interface IProps {
 }
 export const LinksList: FC<IProps> = ({ links, handleDelete, handleEdit }) => {
   return (
-    <Grid container>
+    <Grid container >
       {links.map((item) => (
         <LinkItem
           key={item.id}
