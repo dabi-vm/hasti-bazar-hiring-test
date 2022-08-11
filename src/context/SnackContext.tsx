@@ -37,7 +37,6 @@ const SnackContextProvider = ({ children }: IProps) => {
         open={open}
         autoHideDuration={3000}
         onClose={hideAlert}
-        className="dir-ltr"
       >
         <MuiAlert
           elevation={6}

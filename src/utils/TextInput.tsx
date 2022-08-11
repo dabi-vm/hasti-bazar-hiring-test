@@ -53,7 +53,6 @@ const TextInput: React.FC<IProps> = ({
             inputProps={{ maxLength: maxLength }}
             error={error}
             helperText={helpText}
-            style={{ direction: "rtl" }}
           />
         </>
       )}

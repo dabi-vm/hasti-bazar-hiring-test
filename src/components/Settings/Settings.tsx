@@ -6,23 +6,25 @@ import { AddLink } from "./AddLink/AddLink";
 import { useContext, useState } from "react";
 import { ILinkItem } from "../../models/links";
 import { SnackContext } from "../../context/SnackContext";
+import { useTranslation } from "react-i18next";
 
 const breadcrumbs = [
   {
-    text: "خانه",
+    text: "home",
     to: "/",
   },
   {
-    text: "کاربر",
+    text: "user",
     to: "/",
   },
   {
-    text: "تنظیمات",
+    text: "setting",
     to: "/profile/settings/",
   },
 ];
 
 export const Settings = () => {
+  const { t } = useTranslation();
   const [linksList, setLinksList] = useState<ILinkItem[]>([]);
   const { showAlert } = useContext(SnackContext);
 
@@ -37,7 +39,7 @@ export const Settings = () => {
     if (DuplicateCheck(v)) {
       showAlert({
         type: "warning",
-        message: "مقادیر وارد شده تکراری است",
+        message: t("duplicateData"),
       });
     } else {
       setLinksList((preState) => [...preState, v]);
@@ -52,7 +54,7 @@ export const Settings = () => {
     if (DuplicateCheck(v)) {
       showAlert({
         type: "warning",
-        message: "مقادیر وارد شده تکراری است",
+        message: t("duplicateData"),
       });
     } else {
       // find item and replace new item data
@@ -70,10 +72,10 @@ export const Settings = () => {
 
   return (
     <Grid container>
-      <Navbar title="تنظیمات کاربری" breadcrumbs={breadcrumbs} />
+      <Navbar title={t("userSetting")} breadcrumbs={breadcrumbs} />
       <Grid item xs={12}>
         <CustomPaper variant="black90" elevation={1}>
-          <p>مسیرهای ارتباطی</p>
+          <p>{t("links")}</p>
           <AddLink handleSubmit={HandleAddLink} />
           <LinksList
             links={linksList}

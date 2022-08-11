@@ -1,0 +1,21 @@
+{
+  "home": "Home",
+  "setting": "Setting",
+  "helloWelcomeToThisApp": "Hello, Welcome to this app.",
+  "farsi": "Farsi",
+  "duplicateData": "Duplicate Data",
+  "userSetting": "User Setting",
+  "links": "Links",
+  "required": "Required",
+  "EnterCorrectAddress": "Enter correct address",
+  "type": "Type",
+  "link": "Link",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "removeLink": "Remove Link",
+  "areYouSureToRemoveThisItem": "Are you sure to remove this item?",
+  "addLink": "Add link",
+  "user": "User",
+  "remove": "Remove",
+  "edit": "Edit"
+}

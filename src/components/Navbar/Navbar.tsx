@@ -1,19 +1,22 @@
 import { Button, Grid, IconButton, Typography } from "@mui/material";
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { IBreadcrumbs } from "../../models/breadcrumbs";
 import { GenericBreadcrumbs } from "../shared/GenericBreadcrumbs/GenericBreadcrumbs";
 import { GridContainer } from "./NavbarStyles";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import NightlightIcon from "@mui/icons-material/Nightlight";
-import { getLocalStorage, setLocalStorage } from "../../func/common";
+import { setLocalStorage } from "../../func/common";
 import { MultiLanguageContext } from "../../context/MultiLanguageContext";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n";
 
 interface IProps {
   title: string;
   breadcrumbs?: IBreadcrumbs[];
 }
 export const Navbar: FC<IProps> = ({ title, breadcrumbs }) => {
+  const { t } = useTranslation();
   const { dark, ToggleTheme } = useContext(ThemeContext);
   const { multiLang, changeLang } = useContext(MultiLanguageContext);
 
@@ -24,15 +27,15 @@ export const Navbar: FC<IProps> = ({ title, breadcrumbs }) => {
   const ToggleRtl = () => {
     if (multiLang.lang === "faIR") {
       changeLang({ isRTl: false, lang: "enUS" });
-      document.dir = "ltr";
     } else {
       changeLang({ isRTl: true, lang: "faIR" });
-      document.dir = "rtl";
     }
   };
 
   useEffect(() => {
     setLocalStorage("lang", multiLang.lang);
+    i18n.changeLanguage(multiLang.lang === "faIR" ? "fa" : "en");
+    document.dir = multiLang.lang === "faIR" ? "rtl" : "ltr";
   }, [multiLang]);
 
   return (
@@ -43,7 +46,7 @@ export const Navbar: FC<IProps> = ({ title, breadcrumbs }) => {
         </Grid>
         <Grid item>
           <Button onClick={ToggleRtl}>
-            {multiLang.lang === "faIR" ? "فارسی" : "English"}
+            {multiLang.lang === "faIR" ? t("farsi") : t("english")}
           </Button>
           <IconButton onClick={HandleToggleTheme}>
             {dark ? <NightlightIcon /> : <LightModeIcon />}

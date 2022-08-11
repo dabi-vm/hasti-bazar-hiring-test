@@ -7,12 +7,14 @@ import { Icons } from "../../../shared/Icons/Icons";
 import { ModalContext } from "../../../../context/ModalContext";
 import { ModifyLinkForm } from "../../ModifyLinkForm/ModifyLinkForm";
 import "./LinkItemStyles.css";
+import { useTranslation } from "react-i18next";
 interface IProps {
   item: ILinkItem;
   deleteHandler(id: string): void;
   editHandler(v: ILinkItem): void;
 }
 const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
+  const { t } = useTranslation();
   const [isExpand, setIsExpand] = useState(false);
   const { showModal, hideModal } = useContext(ModalContext);
   const [editValues, setEditValues] = useState<ILinkItem>();
@@ -30,13 +32,13 @@ const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
 
   const HandleDeleteModal = (id: string) => {
     showModal({
-      title: "حذف مسیر ارتباطی",
-      description: "آیا از تصمیم خود مطمئن هستید؟",
+      title: t("removeLink"),
+      description: t("areYouSureToRemoveThisItem"),
       maxWidth: "xs",
       action: (
         <>
           <Button
-            children="انصراف"
+            children={t("cancel")}
             variant="outlined"
             onClick={hideModal}
             color="warning"
@@ -46,7 +48,7 @@ const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
             }}
           />
           <Button
-            children="حذف"
+            children={t("remove")}
             variant="contained"
             onClick={() => {
               deleteHandler(id);
@@ -80,7 +82,7 @@ const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
         <Icons name={item.title} />
         &nbsp;
         {item.title}&nbsp;
-        <Typography variant="caption">لینک: </Typography>&nbsp;
+        <Typography variant="caption">{t("link")}: </Typography>&nbsp;
         <Link href={item.link} color="#ffa82e">
           {item.link}
         </Link>
@@ -93,7 +95,7 @@ const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
           disabled={isExpand}
         >
           <EditIcon />
-          &nbsp; ویرایش
+          &nbsp; {t("edit")}
         </Button>
         <Button
           variant="text"
@@ -101,7 +103,7 @@ const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
           onClick={() => HandleDeleteModal(item.id)}
         >
           <DeleteIcon />
-          &nbsp; حذف
+          &nbsp; {t("remove")}
         </Button>
       </Grid>
       <Grid item xs={12}>

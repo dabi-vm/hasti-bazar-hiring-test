@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import TextInput from "../../../utils/TextInput";
 import SelectInput from "../../../utils/SelectInput";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
   handleSubmit(v: ILinkItem): void;
@@ -19,15 +20,17 @@ export const ModifyLinkForm: FC<IProps> = ({
   defaultValues,
   handleCancel,
 }) => {
+  const { t } = useTranslation();
+
   const schema = yup.object().shape({
     link: yup
       .string()
-      .required("فیلد الزامی")
+      .required(t("required"))
       .matches(
         /^((https?|ftp):\/\/)?(www.)?(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i,
-        "آدرس صحیح وارد کنید"
+        t("EnterCorrectAddress")
       ),
-    title: yup.string().required("فیلد الزامی"),
+    title: yup.string().required(t("required")),
   });
 
   const {
@@ -57,7 +60,7 @@ export const ModifyLinkForm: FC<IProps> = ({
         <Grid item xs={4}>
           <SelectInput
             name="title"
-            placeholder="نوع"
+            placeholder={t("type")}
             options={SocialNetworksList}
             hasOptionsIcon
             fullWidth
@@ -68,7 +71,7 @@ export const ModifyLinkForm: FC<IProps> = ({
         </Grid>
         <Grid item xs={8}>
           <TextInput
-            placeholder="لینک"
+            placeholder={t("link")}
             name="link"
             fullWidth
             control={control}
@@ -78,7 +81,7 @@ export const ModifyLinkForm: FC<IProps> = ({
         </Grid>
         <Grid item>
           <Button
-            children="انصراف"
+            children={t("cancel")}
             size="small"
             variant="outlined"
             onClick={handleCancel}
@@ -87,7 +90,7 @@ export const ModifyLinkForm: FC<IProps> = ({
         <Grid item>
           <Button
             type="submit"
-            children="ثبت مسیر ارتباطی"
+            children={t("submit")}
             size="small"
             variant="contained"
           />

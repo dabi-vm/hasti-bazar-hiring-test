@@ -7,18 +7,17 @@ import { MainLayout } from "./layouts/MainLayout";
 import ThemeProvider from "./themes/ThemeProvider";
 
 function App() {
-
   return (
     <ContextProviders
       contextProviders={[
+        MultiLanguageContext,
         ModalContextProvider,
         SnackContextProvider,
         ThemeContextProvider,
         ThemeProvider,
-        MultiLanguageContext,
       ]}
     >
-        <MainLayout />
+      <MainLayout />
     </ContextProviders>
   );
 }

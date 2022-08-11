@@ -1,0 +1,21 @@
+{
+  "home": "خانه",
+  "setting": "تنظیمات",
+  "helloWelcomeToThisApp": "سلام. به برنامه خود خوش آمدید",
+  "farsi": "فارسی",
+  "duplicateData": "داده وارد شده تکراری است.",
+  "userSetting": "تنظیمات کاربری",
+  "links": "لینک ها",
+  "required": "اجباری",
+  "EnterCorrectAddress": "آدرس صحیح وارد کنید",
+  "type": "نوع",
+  "link": "لینک",
+  "cancel": "لغو",
+  "submit": "ثبت",
+  "removeLink": "حذف لینک",
+  "areYouSureToRemoveThisItem": "آیا از حذف مورد انتخاب شده مطمئن هستید؟",
+  "addLink": "اضافه کردن لینک",
+  "user": "کاربر",
+  "remove": "حذف",
+  "edit": "ویرایش"
+}
