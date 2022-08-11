@@ -6,10 +6,16 @@
 npm install
 ```
 
+- Run json server
+
+```
+npx json-server --watch data/db.json --port 8000
+```
+
 - Run Project
 
 ```
-npm start
+npm run dev
 ```
 
 ## Task 1:
@@ -20,11 +26,13 @@ npm start
 برای برطرف کردن این مشکل داده ها باید در localStorage و یا به صورت json-server ذخیره سازی شود.
 
 کدهای تسک 1 روی برنچ task-1 پوش شده است.
+
 </div>
 
 ## Task 2:
 
 <div dir='rtl' align='right'>
+تغییر پروژه به Nextjs
 در پیاده سازی تسک 2 از کتابخانه react-hook-form برای پیاده سازی فرم استفاده شد. همچنین از yup برای انجام اعتبارسنحی.
 جهت تغییر تم تاریک و روشن از تم متریال و برای ایجاد چند زبانی از i18next استفاده شد.
 همچنین استفاده از json-server پرت 8000 کانفیگ شده است.
@@ -35,6 +43,7 @@ npx json-server --watch data/db.json --port 8000
 ```
 
 کدهای مربوط به تسک 2 در برنچ task-2 پوش شده است.
+
 </div>
 
 ## Task 3:
@@ -45,8 +54,15 @@ npx json-server --watch data/db.json --port 8000
 جستجو روی لینک های موجود پیاده سازی شده
 
 مشکلات:
+
 - نداشتن تست کیس
 - عدم استفاده از کشینگ api
 
 کدهای مربوط به تسک 3 در برنچ task-3 پوش شده است.
+
+</div>
+
+<div dir='rtl' align='right'>
+همه برنچ ها روی develop مرج شده اند.
+با سپاس از شما
 </div>
