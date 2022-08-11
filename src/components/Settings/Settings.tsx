@@ -2,11 +2,12 @@ import { Grid } from "@mui/material";
 import { Navbar } from "../Navbar/Navbar";
 import { CustomPaper } from "./SettingsStyles";
 import { LinksList } from "./LinksList/LinksList";
-import { AddLink } from "./AddLink/AddLink";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ILinkItem } from "../../models/links";
 import { SnackContext } from "../../context/SnackContext";
 import { useTranslation } from "react-i18next";
+import { AddLink } from "./AddLink/AddLink";
+import agent from "../../services/agent";
 
 const breadcrumbs = [
   {
@@ -28,9 +29,25 @@ export const Settings = () => {
   const [linksList, setLinksList] = useState<ILinkItem[]>([]);
   const { showAlert } = useContext(SnackContext);
 
+  const GetLinksList = () => {
+    agent.Links.list(100, 1).then((res) => setLinksList(res));
+  };
+
+  const AddLinkAPI = (form: ILinkItem) => {
+    agent.Links.postLink(form).then(() => GetLinksList());
+  };
+
+  const EditLink = (form: ILinkItem) => {
+    agent.Links.editLink(form).then(() => GetLinksList());
+  };
+
+  const RemoveLink = (id: string) => {
+    agent.Links.removeLink(id).then(() => GetLinksList());
+  };
+
   const DuplicateCheck = (v: ILinkItem) => {
     const isDuplicate = linksList.some(
-      (item) => item.link === v.link && item.title === v.title
+      (item: ILinkItem) => item.link === v.link && item.title === v.title
     );
     return isDuplicate;
   };
@@ -42,12 +59,8 @@ export const Settings = () => {
         message: t("duplicateData"),
       });
     } else {
-      setLinksList((preState) => [...preState, v]);
+      AddLinkAPI(v);
     }
-  };
-
-  const HandleDeleteLink = (id: string) => {
-    setLinksList((preState) => preState.filter((el) => el.id !== id));
   };
 
   const HandleEditLink = (v: ILinkItem) => {
@@ -57,18 +70,13 @@ export const Settings = () => {
         message: t("duplicateData"),
       });
     } else {
-      // find item and replace new item data
-      setLinksList((preState) =>
-        preState.map((el) => {
-          if (el.id === v.id) {
-            el.link = v.link;
-            el.title = v.title;
-          }
-          return el;
-        })
-      );
+      EditLink(v);
     }
   };
+
+  useEffect(() => {
+    GetLinksList();
+  }, []);
 
   return (
     <Grid container>
@@ -79,7 +87,7 @@ export const Settings = () => {
           <AddLink handleSubmit={HandleAddLink} />
           <LinksList
             links={linksList}
-            handleDelete={HandleDeleteLink}
+            handleDelete={RemoveLink}
             handleEdit={HandleEditLink}
           />
         </CustomPaper>

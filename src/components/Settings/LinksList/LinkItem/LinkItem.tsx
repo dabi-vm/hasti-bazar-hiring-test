@@ -6,7 +6,6 @@ import { ILinkItem } from "../../../../models/links";
 import { Icons } from "../../../shared/Icons/Icons";
 import { ModalContext } from "../../../../context/ModalContext";
 import { ModifyLinkForm } from "../../ModifyLinkForm/ModifyLinkForm";
-import "./LinkItemStyles.css";
 import { useTranslation } from "react-i18next";
 interface IProps {
   item: ILinkItem;
@@ -25,7 +24,10 @@ const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
   };
 
   const HandleSubmitEdit = (v: ILinkItem) => {
-    editHandler(v);
+    editHandler({
+      ...v,
+      id: editValues?.id ?? "",
+    });
     setEditValues(undefined);
     setIsExpand(false);
   };
@@ -76,7 +78,9 @@ const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
       xs={12}
       component={Paper}
       variant="black80"
-      className="root"
+      sx={{
+        margin: 1,
+      }}
     >
       <Grid item xs={12} sm={9} container alignItems="center">
         <Icons name={item.title} />
