@@ -1,15 +1,13 @@
-import {
-  Grid,
-  Select,
-  MenuItem,
-  TextField,
-  Button,
-  Paper,
-} from "@mui/material";
-import React, { FC, useRef } from "react";
+import { Grid, Button, Paper } from "@mui/material";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
 import { ILinkItem } from "../../../models/links";
-import { Icons } from "../../shared/Icons/Icons";
 import { SocialNetworksList } from "../AddLink/AddlinkConstants";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import TextInput from "../../../utils/TextInput";
+import SelectInput from "../../../utils/SelectInput";
+
 interface IProps {
   handleSubmit(v: ILinkItem): void;
   handleCancel(): void;
@@ -21,30 +19,29 @@ export const ModifyLinkForm: FC<IProps> = ({
   defaultValues,
   handleCancel,
 }) => {
-  const formRef = useRef<HTMLFormElement>(null);
+  const schema = yup.object().shape({
+    link: yup
+      .string()
+      .required("فیلد الزامی")
+      .matches(
+        /^((https?|ftp):\/\/)?(www.)?(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i,
+        "آدرس صحیح وارد کنید"
+      ),
+    title: yup.string().required("فیلد الزامی"),
+  });
 
-  const HandleCreateValues = (e: any) => {
-    e.preventDefault();
-
-    // make an object from values of form
-    const target = e.target as typeof e.target & {
-      title: { value: string };
-      link: { value: string };
-    };
-
-    const values: ILinkItem = {
-      id: defaultValues ? defaultValues.id : new Date().toString(),
-      title: target.type.value,
-      link: target.link.value,
-    };
-
-    handleSubmit(values);
-
-    // reset form after submit
-    if (formRef.current !== null) {
-      formRef.current.reset();
-    }
-  };
+  const {
+    control,
+    handleSubmit: submit,
+    formState: { errors },
+  } = useForm<ILinkItem>({
+    mode: "onBlur",
+    resolver: yupResolver(schema),
+    defaultValues: {
+      link: defaultValues?.link,
+      title: defaultValues?.title,
+    },
+  });
 
   return (
     <Paper variant="black70">
@@ -55,33 +52,28 @@ export const ModifyLinkForm: FC<IProps> = ({
         item
         xs={12}
         component="form"
-        ref={formRef}
-        onSubmit={HandleCreateValues}
+        onSubmit={submit(handleSubmit)}
       >
         <Grid item xs={4}>
-          <Select
-            name="type"
+          <SelectInput
+            name="title"
             placeholder="نوع"
+            options={SocialNetworksList}
+            hasOptionsIcon
             fullWidth
-            defaultValue={defaultValues?.title}
-          >
-            {SocialNetworksList.map((item) => (
-              <MenuItem key={item.id} value={item.id}>
-                <Grid container alignItems="center">
-                  <Icons name={item.name} />
-                  &nbsp;
-                  {item.name}
-                </Grid>
-              </MenuItem>
-            ))}
-          </Select>
+            control={control}
+            error={!!errors.title}
+            helpText={errors?.title?.message}
+          />
         </Grid>
         <Grid item xs={8}>
-          <TextField
-            name="link"
+          <TextInput
             placeholder="لینک"
+            name="link"
             fullWidth
-            defaultValue={defaultValues?.link}
+            control={control}
+            error={!!errors.link}
+            helpText={errors?.link?.message}
           />
         </Grid>
         <Grid item>
