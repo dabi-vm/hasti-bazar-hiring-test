@@ -8,7 +8,8 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
+import { MultiLanguageContext } from "../../../context/MultiLanguageContext";
 import { IModalProps } from "../../../models/modal";
 
 const Modal: React.FC<IModalProps> = ({
@@ -22,6 +23,7 @@ const Modal: React.FC<IModalProps> = ({
   dividers,
 }) => {
   const scroll: DialogProps["scroll"] = "paper";
+  const { multiLang } = useContext(MultiLanguageContext);
 
   return (
     <Dialog
@@ -32,6 +34,7 @@ const Modal: React.FC<IModalProps> = ({
       aria-describedby="scroll-dialog-description"
       fullWidth
       maxWidth={maxWidth}
+      dir={multiLang.isRTl ? "rtl" : "ltr"}
     >
       {title && (
         <>
