@@ -46,7 +46,10 @@ export const Navbar: FC<IProps> = ({ title, breadcrumbs }) => {
           <Typography variant="h6">{title}</Typography>
         </Grid>
         <Grid item>
-          <Link href="/" locale={router.locale === "en" ? "fa" : "en"}>
+          <Link
+            href={"/" + router.pathname}
+            locale={router.locale === "en" ? "fa" : "en"}
+          >
             <Button onClick={ToggleRtl}>
               {multiLang.lang === "faIR" ? t("farsi") : t("english")}
             </Button>

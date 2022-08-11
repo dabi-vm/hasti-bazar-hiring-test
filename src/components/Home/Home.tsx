@@ -9,6 +9,8 @@ export const Home = () => {
       <Navbar title={t("home")} />
       <p>{t("helloWelcomeToThisApp")}</p>
       <a href="/settings/">{t("setting")}</a>
+      <br />
+      <a href="/themeConfig/">{t("themeConfig")}</a>
     </Grid>
   );
 };

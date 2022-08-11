@@ -17,5 +17,6 @@
   "addLink": "Add link",
   "user": "User",
   "remove": "Remove",
-  "edit": "Edit"
+  "edit": "Edit",
+  "themeConfig": "Theme Config"
 }
