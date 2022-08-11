@@ -44,6 +44,13 @@ export const darkTheme = createTheme({
         },
       },
     },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          display: "flex",
+        },
+      },
+    },
   },
   palette: {
     mode: "dark",

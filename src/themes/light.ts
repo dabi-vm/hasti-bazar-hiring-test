@@ -46,6 +46,13 @@ export const lightTheme = createTheme({
         },
       ],
     },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          display: "flex",
+        },
+      },
+    },
   },
   palette: {
     primary: {
