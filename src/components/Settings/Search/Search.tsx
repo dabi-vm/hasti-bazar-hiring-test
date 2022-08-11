@@ -9,7 +9,7 @@ interface IProps {
 }
 export const Search: FC<IProps> = ({ linksList, setList }) => {
   const { t } = useTranslation("common");
-  
+
   const HandleSearch = (e: any) => {
     if (e.key === "Enter") {
       const arr = linksList.filter((item) =>
@@ -19,7 +19,7 @@ export const Search: FC<IProps> = ({ linksList, setList }) => {
     }
   };
   return (
-    <Grid container>
+    <Grid container sx={{ marginTop: 1 }}>
       <Grid item xs={12}>
         <TextField
           fullWidth
