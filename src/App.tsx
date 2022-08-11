@@ -1,4 +1,5 @@
 import ModalContextProvider from "./context/ModalContext";
+import SnackContextProvider from "./context/SnackContext";
 import ThemeContextProvider from "./context/ThemeContext";
 import { MainLayout } from "./layouts/MainLayout";
 import ThemeProvider from "./themes/ThemeProvider";
@@ -7,9 +8,11 @@ function App() {
   return (
     <ThemeContextProvider>
       <ThemeProvider>
-        <ModalContextProvider>
-          <MainLayout />
-        </ModalContextProvider>
+        <SnackContextProvider>
+          <ModalContextProvider>
+            <MainLayout />
+          </ModalContextProvider>
+        </SnackContextProvider>
       </ThemeProvider>
     </ThemeContextProvider>
   );
