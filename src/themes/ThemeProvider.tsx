@@ -12,8 +12,9 @@ const ThemeProvider: FC<IProps> = ({ children }) => {
   const { multiLang } = useContext(MultiLanguageContext);
   const theme = getThemeByName(dark ? "darkTheme" : "lightTheme");
   theme.direction = multiLang.isRTl ? "rtl" : "ltr";
+
   theme.palette.primary.main = costumeColor;
-  
+
   return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
 };
 

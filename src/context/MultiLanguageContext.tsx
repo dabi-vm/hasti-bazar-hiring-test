@@ -18,16 +18,16 @@ interface IContext {
 
 export const MultiLanguageContext = createContext<IContext>({
   multiLang: {
-    isRTl: true,
-    lang: "faIR",
+    isRTl: false,
+    lang: "enUS",
   },
   changeLang: (lang: IStateMultiLanguage) => {},
 });
 
 const MultiLanguageProvider = ({ children }: IProps) => {
   const [multiLang, setMultiLang] = useState<IStateMultiLanguage>({
-    isRTl: true,
-    lang: "faIR",
+    isRTl: false,
+    lang: "enUS",
   });
 
   const changeLang = (v: IStateMultiLanguage) => setMultiLang(v);

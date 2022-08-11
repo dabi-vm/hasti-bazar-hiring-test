@@ -29,15 +29,14 @@ export const Navbar: FC<IProps> = ({ title, breadcrumbs }) => {
   const ToggleRtl = () => {
     if (multiLang.lang === "faIR") {
       changeLang({ isRTl: false, lang: "enUS" });
+      document.dir = "ltr";
+      setLocalStorage("lang", "enUS");
     } else {
       changeLang({ isRTl: true, lang: "faIR" });
+      document.dir = "rtl";
+      setLocalStorage("lang", "faIR");
     }
   };
-
-  useEffect(() => {
-    setLocalStorage("lang", multiLang.lang);
-    document.dir = multiLang.lang === "faIR" ? "rtl" : "ltr";
-  }, [multiLang]);
 
   return (
     <GridContainer container item xs={12}>
@@ -47,12 +46,10 @@ export const Navbar: FC<IProps> = ({ title, breadcrumbs }) => {
         </Grid>
         <Grid item>
           <Link
-            href={"/" + router.pathname}
+            href={router.pathname}
             locale={router.locale === "en" ? "fa" : "en"}
           >
-            <Button onClick={ToggleRtl}>
-              {multiLang.lang === "faIR" ? t("farsi") : t("english")}
-            </Button>
+            <Button onClick={ToggleRtl}>{t("language")}</Button>
           </Link>
           <IconButton onClick={HandleToggleTheme}>
             {dark ? <NightlightIcon /> : <LightModeIcon />}

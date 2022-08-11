@@ -2,7 +2,7 @@
   "home": "Home",
   "setting": "Setting",
   "helloWelcomeToThisApp": "Hello, Welcome to this app.",
-  "farsi": "Farsi",
+  "language": "فارسی",
   "duplicateData": "Duplicate Data",
   "userSetting": "User Setting",
   "links": "Links",
@@ -18,5 +18,7 @@
   "user": "User",
   "remove": "Remove",
   "edit": "Edit",
-  "themeConfig": "Theme Config"
+  "themeConfig": "Theme Config",
+  "search": "Search",
+  "pressEnterToSearchLink": "Press enter to search link"
 }
