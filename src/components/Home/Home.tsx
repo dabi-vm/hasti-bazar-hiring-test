@@ -1,15 +1,14 @@
 import { Grid } from "@mui/material";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { useTranslation } from "next-i18next";
 import { Navbar } from "../Navbar/Navbar";
 
 export const Home = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   return (
     <Grid>
       <Navbar title={t("home")} />
       <p>{t("helloWelcomeToThisApp")}</p>
-      <Link to="/profile/settings/">{t("setting")}</Link>
+      <a href="/settings/">{t("setting")}</a>
     </Grid>
   );
 };

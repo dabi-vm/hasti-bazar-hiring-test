@@ -6,14 +6,14 @@ import { ILinkItem } from "../../../../models/links";
 import { Icons } from "../../../shared/Icons/Icons";
 import { ModalContext } from "../../../../context/ModalContext";
 import { ModifyLinkForm } from "../../ModifyLinkForm/ModifyLinkForm";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 interface IProps {
   item: ILinkItem;
   deleteHandler(id: string): void;
   editHandler(v: ILinkItem): void;
 }
 const LinkItem: FC<IProps> = ({ item, deleteHandler, editHandler }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const [isExpand, setIsExpand] = useState(false);
   const { showModal, hideModal } = useContext(ModalContext);
   const [editValues, setEditValues] = useState<ILinkItem>();

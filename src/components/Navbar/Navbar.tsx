@@ -8,15 +8,17 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import NightlightIcon from "@mui/icons-material/Nightlight";
 import { setLocalStorage } from "../../func/common";
 import { MultiLanguageContext } from "../../context/MultiLanguageContext";
-import { useTranslation } from "react-i18next";
-import i18n from "../../i18n";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface IProps {
   title: string;
   breadcrumbs?: IBreadcrumbs[];
 }
 export const Navbar: FC<IProps> = ({ title, breadcrumbs }) => {
-  const { t } = useTranslation();
+  const router = useRouter();
+  const { t } = useTranslation("common");
   const { dark, ToggleTheme } = useContext(ThemeContext);
   const { multiLang, changeLang } = useContext(MultiLanguageContext);
 
@@ -34,7 +36,6 @@ export const Navbar: FC<IProps> = ({ title, breadcrumbs }) => {
 
   useEffect(() => {
     setLocalStorage("lang", multiLang.lang);
-    i18n.changeLanguage(multiLang.lang === "faIR" ? "fa" : "en");
     document.dir = multiLang.lang === "faIR" ? "rtl" : "ltr";
   }, [multiLang]);
 
@@ -45,9 +46,11 @@ export const Navbar: FC<IProps> = ({ title, breadcrumbs }) => {
           <Typography variant="h6">{title}</Typography>
         </Grid>
         <Grid item>
-          <Button onClick={ToggleRtl}>
-            {multiLang.lang === "faIR" ? t("farsi") : t("english")}
-          </Button>
+          <Link href="/" locale={router.locale === "en" ? "fa" : "en"}>
+            <Button onClick={ToggleRtl}>
+              {multiLang.lang === "faIR" ? t("farsi") : t("english")}
+            </Button>
+          </Link>
           <IconButton onClick={HandleToggleTheme}>
             {dark ? <NightlightIcon /> : <LightModeIcon />}
           </IconButton>

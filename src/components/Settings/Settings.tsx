@@ -5,7 +5,7 @@ import { LinksList } from "./LinksList/LinksList";
 import { useContext, useEffect, useState } from "react";
 import { ILinkItem } from "../../models/links";
 import { SnackContext } from "../../context/SnackContext";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { AddLink } from "./AddLink/AddLink";
 import agent from "../../services/agent";
 
@@ -25,7 +25,7 @@ const breadcrumbs = [
 ];
 
 export const Settings = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   const [linksList, setLinksList] = useState<ILinkItem[]>([]);
   const { showAlert } = useContext(SnackContext);
 

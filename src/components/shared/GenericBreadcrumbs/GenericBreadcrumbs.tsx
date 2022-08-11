@@ -3,14 +3,14 @@ import Link from "@mui/material/Link";
 import { FC } from "react";
 import { IBreadcrumbs } from "../../../models/breadcrumbs";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 interface IProps {
   links: IBreadcrumbs[];
 }
 
 export const GenericBreadcrumbs: FC<IProps> = ({ links }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
   return (
     <Breadcrumbs
       aria-label="breadcrumb"

@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import TextInput from "../../../utils/TextInput";
 import SelectInput from "../../../utils/SelectInput";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 interface IProps {
   handleSubmit(v: ILinkItem): void;
@@ -20,7 +20,7 @@ export const ModifyLinkForm: FC<IProps> = ({
   defaultValues,
   handleCancel,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
 
   const schema = yup.object().shape({
     link: yup
