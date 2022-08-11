@@ -2,7 +2,7 @@
   "home": "خانه",
   "setting": "تنظیمات",
   "helloWelcomeToThisApp": "سلام. به برنامه خود خوش آمدید",
-  "farsi": "فارسی",
+  "language": "English",
   "duplicateData": "داده وارد شده تکراری است.",
   "userSetting": "تنظیمات کاربری",
   "links": "لینک ها",
@@ -17,5 +17,8 @@
   "addLink": "اضافه کردن لینک",
   "user": "کاربر",
   "remove": "حذف",
-  "edit": "ویرایش"
+  "edit": "ویرایش",
+  "themeConfig": "ویرایش تم",
+  "search": "جستجو",
+  "pressEnterToSearchLink": "جهت جتسجو در لینک ها Enter بزنید"
 }

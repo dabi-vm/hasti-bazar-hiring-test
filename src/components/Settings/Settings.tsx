@@ -2,12 +2,13 @@ import { Grid } from "@mui/material";
 import { Navbar } from "../Navbar/Navbar";
 import { CustomPaper } from "./SettingsStyles";
 import { LinksList } from "./LinksList/LinksList";
-import { useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { ILinkItem } from "../../models/links";
 import { SnackContext } from "../../context/SnackContext";
 import { useTranslation } from "next-i18next";
 import { AddLink } from "./AddLink/AddLink";
 import agent from "../../services/agent";
+import { Search } from "./Search/Search";
 
 const breadcrumbs = [
   {
@@ -24,29 +25,28 @@ const breadcrumbs = [
   },
 ];
 
-export const Settings = () => {
+interface IProps {
+  list: ILinkItem[];
+}
+export const Settings: FC<IProps> = ({ list }) => {
   const { t } = useTranslation("common");
-  const [linksList, setLinksList] = useState<ILinkItem[]>([]);
   const { showAlert } = useContext(SnackContext);
-
-  const GetLinksList = () => {
-    agent.Links.list(100, 1).then((res) => setLinksList(res));
-  };
+  const [linksList, setLinksList] = useState(list);
 
   const AddLinkAPI = (form: ILinkItem) => {
-    agent.Links.postLink(form).then(() => GetLinksList());
+    agent.Links.postLink(form).then(() => location.reload());
   };
 
   const EditLink = (form: ILinkItem) => {
-    agent.Links.editLink(form).then(() => GetLinksList());
+    agent.Links.editLink(form).then(() => location.reload());
   };
 
   const RemoveLink = (id: string) => {
-    agent.Links.removeLink(id).then(() => GetLinksList());
+    agent.Links.removeLink(id).then(() => location.reload());
   };
 
   const DuplicateCheck = (v: ILinkItem) => {
-    const isDuplicate = linksList.some(
+    const isDuplicate = list.some(
       (item: ILinkItem) => item.link === v.link && item.title === v.title
     );
     return isDuplicate;
@@ -74,13 +74,10 @@ export const Settings = () => {
     }
   };
 
-  useEffect(() => {
-    GetLinksList();
-  }, []);
-
   return (
     <Grid container>
       <Navbar title={t("userSetting")} breadcrumbs={breadcrumbs} />
+      <Search linksList={list} setList={setLinksList} />
       <Grid item xs={12}>
         <CustomPaper variant="black90" elevation={1}>
           <p>{t("links")}</p>
